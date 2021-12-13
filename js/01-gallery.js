@@ -1,11 +1,9 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-console.log(galleryItems);
 
 const refs = {
-    galleryList: document.querySelector(".gallery")
+    galleryList: document.querySelector(".gallery"),
 };
-console.log(refs.galleryList);
 
 const galleryMarkup = createGalleryMarkup(galleryItems);
 refs.galleryList.innerHTML = galleryMarkup;
@@ -23,4 +21,26 @@ function createGalleryMarkup(gallery) {
 }).join("");
 };
 
-console.log(galleryMarkup);
+function onItemGalleryClick(e) {
+    e.preventDefault();
+    if (e.target.nodeName != "IMG") {
+        return
+    }
+
+    document.addEventListener('keydown', onKeyboardPush);
+
+    function onKeyboardPush(e) {
+    console.log(e.code);
+    if (e.code === "Escape") {
+        modal.close();
+        document.removeEventListener('keydown', onKeyboardPush);
+    }
+    };
+    
+    const modal = basicLightbox.create(`<img src="${e.target.dataset.source}">`);
+    modal.show();
+}
+
+refs.galleryList.addEventListener('click', onItemGalleryClick);
+
+
