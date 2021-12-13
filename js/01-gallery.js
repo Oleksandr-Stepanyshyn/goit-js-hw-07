@@ -30,7 +30,6 @@ function onItemGalleryClick(e) {
     document.addEventListener('keydown', onKeyboardPush);
 
     function onKeyboardPush(e) {
-    console.log(e.code);
     if (e.code === "Escape") {
         modal.close();
         document.removeEventListener('keydown', onKeyboardPush);
